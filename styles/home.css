@@ -1,23 +1,27 @@
 /* Search */
 #main{
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
 }
 #search{
     background-color: white;
     border-radius: 6px;
-    width: 80%;
+    width: min(400px, 85%);
     height: 40px;
     box-shadow: 2px 2px 4px lightgrey;
-    padding: 8px;
+    padding: 4px;
     display: flex;
-    gap: 8px;
+    padding-right: 8px;
+    padding-left: 8px;
+    gap: 2px;
     justify-content: center;
     align-items: center;
     margin-top: 16px;
 }
 #search input{
-    width: 92%;
+    width: 85%;
     height: 70%;
     border: none;
     outline: none;
@@ -33,4 +37,43 @@
     width: 8%;
     background: none;
     border: none;
+}
+
+/* Featured */
+#featured{
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    top: 16px;
+    padding: 12px;
+    min-width: 100vw;
+    border-top: solid lightgray 0.5px;
+    border-bottom: solid lightgray 0.5px;
+}
+#featured h3{
+    margin: 6px;
+}
+#featured-list{
+    display: flex;
+    max-width: 100vw;
+    gap: 8px;
+    overflow-x: auto;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.recipe{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 4px;
+}
+.recipe div{
+    width: 100px;
+    height: 90px;
+    background-color: lightgray;
+}
+.recipe p{
+    margin: 0px;
+    font-size: 14px;
 }
