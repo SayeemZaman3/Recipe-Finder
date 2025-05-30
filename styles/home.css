@@ -1,0 +1,36 @@
+/* Search */
+#main{
+    display: flex;
+    justify-content: center;
+}
+#search{
+    background-color: white;
+    border-radius: 6px;
+    width: 80%;
+    height: 40px;
+    box-shadow: 2px 2px 4px lightgrey;
+    padding: 8px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+}
+#search input{
+    width: 92%;
+    height: 70%;
+    border: none;
+    outline: none;
+    transition: all 0.2s;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+#search input:hover{
+    transition: all 0.2s;
+    border-bottom: black 0.8px solid;
+}
+#search button{
+    width: 8%;
+    background: none;
+    border: none;
+}

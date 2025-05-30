@@ -23,7 +23,7 @@ class myFooter extends HTMLElement{
     connectedCallback(){
         this.innerHTML = `
         <footer>
-            <p>© Design is mostly copied</p>
+            <p>© 2025 Copyright, All rights reserved</p>
         </footer>
         `
     }

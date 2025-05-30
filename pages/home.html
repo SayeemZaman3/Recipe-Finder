@@ -4,13 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Finder</title>
+    
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css'>
     <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/home.css">
 </head>
 <body>
     <div class="wrapper">
         <r-header></r-header>
         <div id="main">
-            
+            <form id="search">
+                <input type="text" id="src">
+                <button><i class="fi fi-rs-search"></i></button>
+            </form>
+            <div class="page">
+                <div id="featured">
+                    
+                </div>
+                <div id="browse">
+                    
+                </div>
+            </div>
         </div>
         <r-footer></r-footer>
     </div>
@@ -18,5 +32,6 @@
     <script src="../scripts/components.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="../scripts/base.js"></script>
+    <script src="../scripts/home.js"></script>
 </body>
 </html>
