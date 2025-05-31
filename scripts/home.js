@@ -16,7 +16,6 @@ async function getData(name) {
     const rawData = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
     const data = await rawData.json();
     
-    console.log(data);
     generateFeed();
 }
 getData('fried chicken');
@@ -30,8 +29,30 @@ async function generateFeed(){
         // Meal Data
         let randomRecipe = await fetch(`https://www.themealdb.com/api/json/v1/1/random.php`);
         let data = await randomRecipe.json();
-        
         let meal = data.meals[0];
+        
+        let ingredients = [];
+        
+        // Deletes foods that are haram in islam.
+        let haram = ['pork', 'ham', 'bacon', 'wine', 'vodka', 'gelatin', 'beer', 'whiskey'];
+        
+        for (let i = 0; i <= 20; i++) {
+            let ing = meal[`strIngredient${i}`];
+            if (ing) {
+                ingredients.push(ing.toLowerCase());
+            }
+        }
+            
+            const isHaram = ingredients.some(ing =>
+                haram.some(haramItem => ing.includes(haramItem))
+            );
+            if (isHaram) {
+                i--;
+                continue;
+            }
+            
+        // Displays the food
+        
         let title = meal.strMeal;
         let category = meal.strCategory;
         let area = meal.strArea;
