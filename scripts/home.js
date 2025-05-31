@@ -3,22 +3,18 @@
 
 // Search
 
-const search = $('#search');
-
-search.submit(e=>{
+$('#search').submit(e=>{
     e.preventDefault();
-    
+    searchData($('input').val());
 })
 
-// Getting Recipe Data
 
-async function getData(name) {
+async function searchData(name) {
     const rawData = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
     const data = await rawData.json();
-    
-    generateFeed();
+    displayRecipe();
 }
-getData('fried chicken');
+
 
 
 // Generating Feed
@@ -34,7 +30,7 @@ async function generateFeed(){
         let ingredients = [];
         
         // Deletes foods that are haram in islam.
-        let haram = ['pork', 'ham', 'bacon', 'wine', 'vodka', 'gelatin', 'beer', 'whiskey'];
+        let haram = ['pork', 'ham', 'bacon', 'wine', 'vodka', 'gelatin', 'beer', 'whiskey', 'sausage'];
         
         for (let i = 0; i <= 20; i++) {
             let ing = meal[`strIngredient${i}`];
@@ -73,4 +69,9 @@ async function generateFeed(){
         $('#browse').append(recipe);
             
     }
+}
+generateFeed();
+
+function displayRecipe() {
+    // Tab to edit
 }
