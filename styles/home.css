@@ -68,12 +68,37 @@
     flex-direction: column;
     gap: 4px;
 }
-.recipe div{
+#featured .recipe div{
     width: 100px;
     height: 90px;
     background-color: lightgray;
 }
-.recipe p{
+#featured .recipe p{
     margin: 0px;
     font-size: 14px;
+}
+
+/* Browse */
+#browse{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+#browse .recipe{
+    width: min(90%, 250px);
+    height: 150px;
+    flex-direction: row;
+    gap: 8px;
+}
+#browse .recipe .img{
+    width: 140px;
+    height: 110px;
+    background-color: lightgray;
+}
+#browse .recipe p{
+    font-size: 1rem;
+    margin: 0px;
+    line-height: 1.5rem;
 }
