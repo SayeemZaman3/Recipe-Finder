@@ -1,11 +1,10 @@
 body{
-    height: 100dvh;
     margin: 0px;
 }
 .wrapper{
     display: flex;
     flex-direction: column;
-    height: 100dvh;
+    min-height: 100dvh;
 }
 header{
     height: 50px;
@@ -23,7 +22,7 @@ header{
     overflow-x: hidden;
 }
 footer{
-    width: 100vw;
+    width: 100dvw;
     display: flex;
     justify-content: center;
     background-color: #fefefe;
