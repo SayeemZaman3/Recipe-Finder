@@ -3,13 +3,12 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    overflow: hidden;
 }
 #search{
     background-color: white;
     border-radius: 6px;
     width: min(400px, 85%);
-    height: 40px;
+    min-height: 40px;
     box-shadow: 2px 2px 4px lightgrey;
     padding: 4px;
     display: flex;
@@ -101,4 +100,5 @@
     font-size: 1rem;
     margin: 0px;
     line-height: 1.5rem;
+    overflow-x: auto;
 }

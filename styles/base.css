@@ -20,6 +20,7 @@ header{
 #main{
     flex: 1;
     background-color: #fefefe;
+    overflow-x: hidden;
 }
 footer{
     width: 100vw;
