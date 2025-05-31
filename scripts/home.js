@@ -63,7 +63,7 @@ async function generateFeed(){
         <div class="recipe">
             <img src=${thumbnail}></img>
             <div class = "details">
-                <p>${title}</p>
+                <p class="title">${title}</p>
                 <p>${category}</p>
                 <p>${area}</p>
             </div>
