@@ -86,19 +86,20 @@
     margin-top: 24px;
 }
 #browse .recipe{
-    width: min(90%, 250px);
+    width: min(100%, 250px);
     height: 150px;
     flex-direction: row;
     gap: 8px;
 }
-#browse .recipe .img{
-    width: 140px;
-    height: 110px;
+.recipe img{
+    width: 130px;
+    height: 130px;
     background-color: lightgray;
+    object-fit: cover;
+    border-radius: 4px;
 }
 #browse .recipe p{
     font-size: 1rem;
     margin: 0px;
-    line-height: 1.5rem;
-    overflow-x: auto;
+    line-height: 1.3rem;
 }
