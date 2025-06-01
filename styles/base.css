@@ -44,11 +44,6 @@ h4, h3{
     #m-btn{
         width: 40px;
         height: 40px;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 50%;
-        background-color: white;
-        background-image: url("../assets/menu-burger.png");
         border: none;
         position: absolute;
         left: 5px;
