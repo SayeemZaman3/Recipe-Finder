@@ -12,9 +12,7 @@ $('#search').submit(e=>{
 async function searchData(name) {
     const rawData = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
     const data = await rawData.json();
-    displayRecipe();
 }
-
 
 
 // Generating Feed
@@ -27,12 +25,11 @@ async function generateFeed(){
         let data = await randomRecipe.json();
         let meal = data.meals[0];
         
-        let ingredients = [];
-        
         // Deletes foods that are haram in islam.
+        let ingredients = [];
         let haram = ['pork', 'ham', 'bacon', 'wine', 'vodka', 'gelatin', 'beer', 'whiskey', 'sausage'];
         
-        for (let i = 0; i <= 20; i++) {
+        for (let i = 0; i < 20; i++) {
             let ing = meal[`strIngredient${i}`];
             if (ing) {
                 ingredients.push(ing.toLowerCase());
@@ -49,19 +46,15 @@ async function generateFeed(){
             
         // Displays the food
         
-        let title = meal.strMeal;
-        let category = meal.strCategory;
-        let area = meal.strArea;
-        let thumbnail = meal.strMealThumb
         
         // Element Creation
         let recipe = $(`
-        <div class="recipe">
-            <img src=${thumbnail}></img>
+        <div class="recipe" id="${meal.idMeal}">
+            <img src=${meal.strMealThumb}></img>
             <div class = "details">
-                <p class="title">${title}</p>
-                <p>${category}</p>
-                <p>${area}</p>
+                <p class="title">${meal.strMeal}</p>
+                <p>${meal.strCategory}</p>
+                <p>${meal.strArea}</p>
             </div>
         </div>
         `);
@@ -72,6 +65,54 @@ async function generateFeed(){
 }
 generateFeed();
 
-function displayRecipe() {
-    // Tab to edit
+// Display Recipe
+$('#browse').on('click', '.recipe', function() {
+    displayRecipe($(this).attr('id'));
+});
+
+async function displayRecipe(mealId) {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`);
+    const data = await response.json();
+    const meal = data.meals[0];
+    
+    // Ingredients
+    let ingredients = getIngredients(meal);
+    
+    $('#screen').css('display', 'flex');
+    $('#screen').html(`
+        <button id="back"><</button>
+        <img id = "displayImage" src="${meal.strMealThumb}">
+        <div class="info">
+            <h2 id="name">${meal.strMeal}</h2>
+            <div class="details">
+                <p id="category">${meal.strCategory}</p>
+                <p id="place">${meal.strArea}</p>
+            </div>
+            <p id="instructions">${meal.strInstructions}</p>
+            <div id="ing-list">${ingredients.join('\n')}</div>
+            
+            <a href="${meal.strYoutube}">Tutorial</a>
+            <a href="${meal.strSource}">Source</a>
+        </div>
+    `);
+    $('#back').click(() => {
+    $('#screen').css('display', 'none');
+    $('#screen').html('')
+});
+}
+
+
+function getIngredients(meal) {
+    const ingredients = [];
+    
+    for (let i = 1; i <= 20; i++) {
+        const ingredient = meal[`strIngredient${i}`];
+        const measure = meal[`strMeasure${i}`];
+        
+        if (ingredient && ingredient !== "") {
+            ingredients.push(`${measure.trim()} ${ingredient.trim()}`);
+        }
+    }
+    
+    return ingredients;
 }
