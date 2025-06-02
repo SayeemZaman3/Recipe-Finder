@@ -1,5 +1,6 @@
 body{
     margin: 0px;
+    font-family: Inter;
 }
 .wrapper{
     display: flex;
@@ -48,6 +49,7 @@ h4, h3{
         position: absolute;
         left: 5px;
         top: 5px;
+        background: none;
     }
     #mnavBar{
         width: 200px;

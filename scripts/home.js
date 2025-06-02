@@ -80,7 +80,7 @@ async function displayRecipe(mealId) {
     
     $('#screen').css('display', 'flex');
     $('#screen').html(`
-        <button id="back"><</button>
+        <button id="back"><i class="fi fi-br-cross"></i></button>
         <img id = "displayImage" src="${meal.strMealThumb}">
         <div class="info">
             <h2 id="name">${meal.strMeal}</h2>
@@ -88,17 +88,27 @@ async function displayRecipe(mealId) {
                 <p id="category">${meal.strCategory}</p>
                 <p id="place">${meal.strArea}</p>
             </div>
-            <p id="instructions">${meal.strInstructions}</p>
-            <div id="ing-list">${ingredients.join('\n')}</div>
+            <p id="instructions">
+                <h3>Instructions</h3>
+                ${meal.strInstructions}
+            </p>
+            <div id="ing-list">
+                <h3>Ingredients</h3>
+                ${ingredients.join('\n')}
+            </div>
             
-            <a href="${meal.strYoutube}">Tutorial</a>
-            <a href="${meal.strSource}">Source</a>
+            <div class="src">
+                <a href="${meal.strYoutube}">Tutorial</a>
+                <a href="${meal.strSource}">Source</a>
+            </div>
         </div>
     `);
+    
+    // Close Display
     $('#back').click(() => {
-    $('#screen').css('display', 'none');
-    $('#screen').html('')
-});
+        $('#screen').css('display', 'none');
+        $('#screen').html('')
+    });
 }
 
 
