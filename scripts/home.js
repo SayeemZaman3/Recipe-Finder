@@ -1,68 +1,52 @@
 // Home Page
 
 
-// Search
-
-$('#search').submit(e=>{
-    e.preventDefault();
-    searchData($('input').val());
-})
-
-
-async function searchData(name) {
-    const rawData = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
-    const data = await rawData.json();
-}
-
-
 // Generating Feed
 
 async function generateFeed(){
     for (let i = 0; i < 5; i++) {
-        
-        // Meal Data
         let randomRecipe = await fetch(`https://www.themealdb.com/api/json/v1/1/random.php`);
         let data = await randomRecipe.json();
         let meal = data.meals[0];
-        
+
         // Deletes foods that are haram in islam.
         let ingredients = [];
         let haram = ['pork', 'ham', 'bacon', 'wine', 'vodka', 'gelatin', 'beer', 'whiskey', 'sausage'];
-        
+
         for (let i = 0; i < 20; i++) {
             let ing = meal[`strIngredient${i}`];
             if (ing) {
                 ingredients.push(ing.toLowerCase());
             }
         }
-            
-            const isHaram = ingredients.some(ing =>
-                haram.some(haramItem => ing.includes(haramItem))
-            );
-            if (isHaram) {
-                i--;
-                continue;
-            }
-            
-        // Displays the food
-        
-        
-        // Element Creation
-        let recipe = $(`
-        <div class="recipe" id="${meal.idMeal}">
-            <img src=${meal.strMealThumb}></img>
-            <div class = "details">
-                <p class="title">${meal.strMeal}</p>
-                <p>${meal.strCategory}</p>
-                <p>${meal.strArea}</p>
-            </div>
-        </div>
-        `);
-        
-        $('#browse').append(recipe);
-            
+
+        const isHaram = ingredients.some(ing =>
+            haram.some(haramItem => ing.includes(haramItem))
+        );
+        if (isHaram) {
+            i--;
+            continue;
+        }
+        createElements(meal);
     }
 }
+
+// Element Creation
+function createElements(meal) {
+    let recipe = $(`
+    <div class="recipe" id="${meal.idMeal}">
+        <img src=${meal.strMealThumb}></img>
+        <div class = "details">
+            <p class="title">${meal.strMeal}</p>
+            <p>${meal.strCategory}</p>
+            <p>${meal.strArea}</p>
+        </div>
+    </div>
+    `);
+    
+    $('#browse').append(recipe);
+}
+
 generateFeed();
 
 // Display Recipe
@@ -125,4 +109,30 @@ function getIngredients(meal) {
     }
     
     return ingredients;
+}
+
+
+// Search
+
+$('#search').submit(e => {
+    e.preventDefault();
+    searchData($('input').val().trim());
+})
+
+async function searchData(name) {
+    try {
+        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
+        const data = await response.json();
+        console.log(data);
+        
+        $('#browse').html('');
+        data.meals.forEach(meal => {
+            createElements(meal);
+        })
+    }
+    catch (error) {
+        $('#err').css('display', 'block');
+        $('$err').text(error);
+    }
+    
 }

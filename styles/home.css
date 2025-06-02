@@ -37,6 +37,10 @@
     background: none;
     border: none;
 }
+#err{
+    display: none;
+    margin: 0;
+}
 
 /* Browse */
 #browse{
