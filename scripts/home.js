@@ -15,6 +15,13 @@ async function generateFeed(){
             continue;
         }
         createElements(meal);
+        
+        // To Remove Duplicates
+        const duplicates = $('#myId');
+        if (duplicates.length > 1) {
+            duplicates.slice(1).remove();
+            i--;
+        }
     }
 }
 $('.generate').click(() => {
