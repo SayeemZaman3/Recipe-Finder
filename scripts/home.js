@@ -30,6 +30,10 @@ async function generateFeed(){
         createElements(meal);
     }
 }
+$('.generate').click(() => {
+    generateFeed();
+    $('#search input').val('');
+});
 
 // Element Creation
 function createElements(meal) {
@@ -123,7 +127,6 @@ async function searchData(name) {
     try {
         const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
         const data = await response.json();
-        console.log(data);
         
         $('#browse').html('');
         data.meals.forEach(meal => {
