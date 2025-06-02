@@ -13,6 +13,7 @@ class myHeader extends HTMLElement{
             </div>
             <h3>Recipe Finder</h3>
             <nav id="nav"></nav>
+            <button id="dark"><i class="fi fi-br-moon"></i></button>
         </header>`
     }
 

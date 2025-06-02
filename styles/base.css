@@ -1,6 +1,28 @@
+/* Color Theme */
+:root{
+    --main-bg: #fefefe;
+    --high-bg: #fff;
+    --text: #000;
+    --sc-text: #616161;
+    --shadow: lightgray;
+    --hover: whitesmoke;
+}
+body.dark{
+    --main-bg: #333;
+    --high-bg: #232323;
+    --text: #fff;
+    --sc-text: #888;
+    --shadow: #292B37;
+    --hover: whitesmoke;
+}
+
+/* Main */
+*{
+    font-family: Inter;
+    color: var(--text);
+}
 body{
     margin: 0px;
-    font-family: Inter;
 }
 .wrapper{
     display: flex;
@@ -9,24 +31,25 @@ body{
 }
 header{
     height: 50px;
-    box-shadow: 2px 0px 5px gray;
+    box-shadow: 2px 0px 5px var(--shadow);
     position: relative;
     z-index: 2;
     display: flex;
     justify-content: center;    
     align-items: center;
-    background-color: white;
+    background-color: var(--high-bg);
+    color: var(--text);
 }
 #main{
     flex: 1;
-    background-color: #fefefe;
+    background-color: var(--main-bg);
     overflow-x: hidden;
 }
 footer{
     width: 100dvw;
     display: flex;
     justify-content: center;
-    background-color: #fefefe;
+    background-color: var(--main-bg);
 }
 /* Header & Footer */
 footer p{
@@ -35,6 +58,9 @@ footer p{
 }
 h4, h3{
     margin: 0px;
+}
+header i{
+    font-size: 20px;
 }
 
 /* Navigation */
@@ -54,14 +80,15 @@ h4, h3{
     #mnavBar{
         width: 200px;
         height: 100dvh;
-        box-shadow: 0px 1px 5px lightgray;
+        box-shadow: 0px 1px 5px var(--shadow);
         position: absolute;
         z-index: 5;
         left: -210px;
         top: 0px;
-        background-color: white;
+        background-color: var(--high-bg);
         transition: left 0.4s ease;
         flex-direction: column;
+        color: var(--text);
     }
     #mnavBar.active{
         transition: left 0.4s;
@@ -71,12 +98,12 @@ h4, h3{
         width: 100%;
         height: 40px;
         border: none;
-        background-color: white;
+        background-color: var(--high-bg);
         transition: background-color 0.2s;
     }
     #mnavBar button:hover{
         transition: all 0.2s;
-        background-color: whitesmoke;
+        background-color: var(--hover);
     }
     #mnavBar h4{
         width: 100%;
@@ -97,6 +124,7 @@ h4, h3{
         height: 50%;
         position: absolute;
         right: 8px;
+        color: var(--text);
     }
     #nav button{
         padding: 8px;
@@ -110,7 +138,18 @@ h4, h3{
     }
     #nav button:hover{
         transition: all 0.2s;
-        background-color: whitesmoke;
+        background-color: var(--hover);
     }
     
+}
+
+/* Dark/Light Mode */
+#dark{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: 0;
 }
