@@ -8,21 +8,8 @@ async function generateFeed(){
         let randomRecipe = await fetch(`https://www.themealdb.com/api/json/v1/1/random.php`);
         let data = await randomRecipe.json();
         let meal = data.meals[0];
-
-        // Deletes foods that are haram in islam.
-        let ingredients = [];
-        let haram = ['pork', 'ham', 'bacon', 'wine', 'vodka', 'gelatin', 'beer', 'whiskey', 'sausage'];
-
-        for (let i = 0; i < 20; i++) {
-            let ing = meal[`strIngredient${i}`];
-            if (ing) {
-                ingredients.push(ing.toLowerCase());
-            }
-        }
-
-        const isHaram = ingredients.some(ing =>
-            haram.some(haramItem => ing.includes(haramItem))
-        );
+        
+        const isHaram = haramChecker(meal);
         if (isHaram) {
             i--;
             continue;
@@ -128,14 +115,48 @@ async function searchData(name) {
         const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
         const data = await response.json();
         
+        // Error Handling
+        if (name === "Pork") {
+            throw new Error('Haram foods are not here!')
+        }
+        if (!data.meals) {
+            throw new Error('This is not available');
+        }
+        
+        // Loader
         $('#browse').html('');
         data.meals.forEach(meal => {
+            const isHaram = haramChecker(meal);
+            if (isHaram) {
+                return;
+            }
             createElements(meal);
-        })
+        });
+        
     }
     catch (error) {
         $('#err').css('display', 'block');
-        $('$err').text(error);
+        $('#err').text(error);
     }
     
+}
+$(document).click(() => $('#err').css('display', 'none'));
+
+// Haram checker
+function haramChecker(meal) {
+    // Deletes foods that are haram in islam.
+    let ingredients = [];
+    let haram = ['pork', 'ham', 'bacon', 'wine', 'vodka', 'gelatin', 'beer', 'whiskey', 'sausage'];
+    
+    for (let i = 0; i < 20; i++) {
+        let ing = meal[`strIngredient${i}`];
+        if (ing) {
+            ingredients.push(ing.toLowerCase());
+        }
+    }
+    
+    const isHaram = ingredients.some(ing =>
+        haram.some(haramItem => ing.includes(haramItem))
+    );
+    return isHaram;
 }
