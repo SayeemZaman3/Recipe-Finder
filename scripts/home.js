@@ -15,13 +15,6 @@ async function generateFeed(){
             continue;
         }
         createElements(meal);
-        
-        // To Remove Duplicates
-        const duplicates = $('#myId');
-        if (duplicates.length > 1) {
-            duplicates.slice(1).remove();
-            i--;
-        }
     }
 }
 $('.generate').click(() => {
@@ -31,6 +24,12 @@ $('.generate').click(() => {
 
 // Element Creation
 function createElements(meal) {
+    
+    // Avoids repeating
+    if ($(`#${meal.idMeal}`).length > 0) {
+        return
+    }
+    
     let recipe = $(`
     <div class="recipe" id="${meal.idMeal}">
         <img src=${meal.strMealThumb}></img>
@@ -43,7 +42,8 @@ function createElements(meal) {
     `);
     
     $('#browse').append(recipe);
-}
+};
+
 
 generateFeed();
 
