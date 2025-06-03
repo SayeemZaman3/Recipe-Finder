@@ -117,35 +117,44 @@ $('#search').submit(e => {
     searchData($('input').val().trim());
 })
 
-async function searchData(name) {
+async function searchData(input) {
+    
     try {
-        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
-        const data = await response.json();
+    // Getting The Type Of Input
+    let response, data;
+    
+    if(!isNaN(input)){
+        response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${input}`);
+    } else if (input.length === 1) {
+        response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${input}`);
+    } else {
+        response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${input}`);
+    }
+    
+    data = await response.json();
         
-        // Error Handling
-        if (name === "Pork") {
-            throw new Error('Haram foods are not here!')
-        }
-        if (!data.meals) {
-            throw new Error('This is not available');
-        }
-        
-        // Loader
-        $('#browse').html('');
-        data.meals.forEach(meal => {
+    // Loader
+    if (typeof input === 'string') {
+        if (data.meals) {
+            $('#browse').html('');
+            data.meals.forEach(meal => {
             const isHaram = haramChecker(meal);
             if (isHaram) {
                 return;
             }
             createElements(meal);
-        });
-        
+            });
+        } else {
+            throw new Error('This is not available');
+        }
+    } else if (input = "") {
+        throw new Error('Please Enter something!');
+    }
     }
     catch (error) {
         $('#err').css('display', 'block');
         $('#err').text(error);
     }
-    
 }
 $(document).click(() => $('#err').css('display', 'none'));
 
