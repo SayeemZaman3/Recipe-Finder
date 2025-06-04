@@ -144,3 +144,66 @@
     color: var(--sc-text);
     margin: 0px;
 }
+/* Filter */
+.dropdownBar{
+    margin: 8px;
+    display: flex;
+}
+.drop{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.drop button{
+    padding: 4px 8px;
+    --drop-width: 100px;
+    width: var(--drop-width);
+    height: 30px;
+    margin: 4px;
+    border-radius: 2px;
+    outline: none;
+    text-align: center;
+    background-color: var(--high-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+}
+.drop button.active{
+    transition: all 0.3s;
+    background-color: var(--hover);
+    color: var(--text);
+}
+.content{
+    display: none;
+}
+.content.active{
+    display: grid;
+    position: absolute;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(5, 30px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 320px;
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 4px;
+    border-radius: 4px;
+    padding: 6px;
+    margin: 0px;
+    background-color: var(--high-bg);
+    box-shadow: 2px 2px 5px var(--shadow2);
+}
+.content button{
+    width: var(--drop-width);
+    margin: 0px;
+    border: 0.5px solid var(--border);
+    overflow-y: auto;
+}
+.content button:hover{
+    background-color: var(--hover);
+}
+.content button:focus{
+    background-color: var(--focus);
+    color: #fff;
+}

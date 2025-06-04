@@ -1,8 +1,6 @@
 // Home Page
 
-
 // Generating Feed
-
 async function generateFeed(){
     for (let i = 0; i < 5; i++) {
         let randomRecipe = await fetch(`https://www.themealdb.com/api/json/v1/1/random.php`);
@@ -17,6 +15,8 @@ async function generateFeed(){
         createElements(meal);
     }
 }
+
+// Button For More Recommendation
 $('.generate').click(() => {
     generateFeed();
     $('#search input').val('');
@@ -27,10 +27,16 @@ function createElements(meal) {
     
     // Avoids repeating
     if ($(`#${meal.idMeal}`).length > 0) {
-        return
+        return;
+    }
+    // Checks for Haram
+    const isHaram = haramChecker(meal);
+    if (isHaram) {
+        return;
     }
     
-    let recipe = $(`
+    // Creates
+    $('#browse').append(`
     <div class="recipe" id="${meal.idMeal}">
         <img src=${meal.strMealThumb}></img>
         <div class = "details">
@@ -40,8 +46,6 @@ function createElements(meal) {
         </div>
     </div>
     `);
-    
-    $('#browse').append(recipe);
 };
 
 
@@ -52,6 +56,8 @@ $('#browse').on('click', '.recipe', function() {
     displayRecipe($(this).attr('id'));
 });
 
+
+// Displays the instructions and recipe
 async function displayRecipe(mealId) {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`);
     const data = await response.json();
@@ -94,6 +100,7 @@ async function displayRecipe(mealId) {
 }
 
 
+// Gets the ingredients
 function getIngredients(meal) {
     const ingredients = [];
     
@@ -158,11 +165,12 @@ async function searchData(input) {
 }
 $(document).click(() => $('#err').css('display', 'none'));
 
+
 // Haram checker
+let haram = ['pork', 'ham', 'bacon', 'wine', 'vodka', 'gelatin', 'beer', 'whiskey', 'sausage'];
 function haramChecker(meal) {
     // Deletes foods that are haram in islam.
     let ingredients = [];
-    let haram = ['pork', 'ham', 'bacon', 'wine', 'vodka', 'gelatin', 'beer', 'whiskey', 'sausage'];
     
     for (let i = 0; i < 20; i++) {
         let ing = meal[`strIngredient${i}`];
@@ -175,4 +183,70 @@ function haramChecker(meal) {
         haram.some(haramItem => ing.includes(haramItem))
     );
     return isHaram;
+}
+
+// Filter
+$('.drop button').click(function() {
+    const isActive = $(this).hasClass('active');
+    
+    // First, remove all active classes
+    $('.content, .drop button').removeClass('active');
+    
+    // If the button wasn't already active, activate it and its content
+    if (!isActive) {
+        $(this).siblings('.content').addClass('active');
+        $(this).addClass('active');
+    }
+});
+
+// Dropdown
+async function drop(type) {
+    // Gets response from server according to the type
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?${type.charAt(0)}=list`)
+    const data = await response.json();
+    
+    let tyText = 'btn.str' + type.charAt(0).toUpperCase() + type.slice(1);
+    
+    data.meals.forEach(btn => {
+        // Checks Haram
+        if (haram.some(haram => eval(tyText).toLowerCase().includes(haram))) {
+            return;
+        }
+        
+        // Creates
+        $(`#${type} .content`).append(
+            `<button class='filter-btn'>${eval(tyText)}</button>`
+        );
+    });
+    
+    
+}
+
+// Run them
+['category', 'area', 'ingredient'].forEach(drop);
+
+
+// Clicking On Filter
+$(document).on('click', '.filter-btn', function() {
+    let value = $(this).text();
+    let type = $(this).closest('.content').parent().attr('id').charAt(0);
+    
+    filter(value, type);
+});
+
+
+// Filter Function
+async function filter(value, type){
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?${type}=${value}`);
+    const data = await response.json();
+    
+    $('#browse').html('');
+    for (const meal of data.meals) {
+        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`);
+        const data = await response.json();
+        const detailedMeal = data.meals[0];
+    
+        createElements(detailedMeal);
+    }
+    
 }
