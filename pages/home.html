@@ -1,54 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Finder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-    <link rel="stylesheet" href="../styles/base.css">
+    
+    <link rel="stylesheet" href="../styles/base.css"></link>
     <link rel="stylesheet" href="../styles/home.css">
 </head>
 <body>
     <div class="wrapper">
-        <r-header></r-header>
-        <div id="main">
-            <form id="search">
-                <input type="text" id="src">
-                <button><i class="fi fi-br-search"></i></button>
-            </form>
-            <div class="dropdownBar">
-                <div id="category" class="drop">
-                    <button>Category</button>
-                    <div class="content"></div>
-                </div>
-                <div id="area" class="drop">
-                    <button>Place</button>
-                    <div class="content"></div>
-                </div>
-                <div id="ingredient" class="drop">
-                    <button>Ingredient</button>
-                    <div class="content"></div>
-                </div>
-            </div>
-            <p id="err"></p>
-            <div id="page">
-                <div id="browse"></div>
-                <button class="generate">More</button>
-                
-                <!-- Screen -->
-                <div id="screen"></div>
-                
-            </div>
+    <r-header></r-header>
+    <div id="main">
+        <h2>Welcome!</h2>
+        <h5>Cook anything you want to</h5>
+        <div class="links">
+            <button id="browse">Browse</button>
+            <button id="contact">Contact</button>
         </div>
-        <r-footer></r-footer>
+    </div>
+    <r-footer></r-footer>
     </div>
     
-    <script src="../scripts/components.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="../scripts/components.js"></script>
     <script src="../scripts/base.js"></script>
     <script src="../scripts/home.js"></script>
 </body>
