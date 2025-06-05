@@ -22,13 +22,11 @@ const links = [
 
 links.forEach(link => {
     let li = $('<button>', {
-        text: link.name
-    }).click(() => {
-        window.location.href = link.url;
-    });
+        text: link.name,
+    }).click(() => window.location.href = link.url );
     
     $('#nav').append(li);
-    $('#mnavBar nav').append(li.clone());
+    $('#mnavBar nav').append(li.clone(true));
 });
 
 // Dark/Light Mode
