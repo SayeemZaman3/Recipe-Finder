@@ -207,3 +207,34 @@
     background-color: var(--focus);
     color: #fff;
 }
+/* Responsive */
+@media(min-width: 751px){
+    /* Browse Page */
+    #main{
+        padding: 32px;
+    }
+    #browse{
+        gap: 20px;
+    }
+    .recipe{
+        gap: 24px;
+    }
+    .recipe .title{
+        font-size: 1.3rem;
+    }
+    .recipe p{
+        font-size: 1rem;
+    }
+    /* Display */
+    #screen {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+    #displayImage {
+        width: 50%;
+        height: 50%;
+    }
+    #back{
+        transform: scale(1.5);
+    }
+}
