@@ -4,15 +4,7 @@ class myHeader extends HTMLElement{
     connectedCallback(){
         this.innerHTML = `
         <header>
-            <div id="mnav">
-                <button id="m-btn"><i class="fi fi-br-menu-burger"></i></button>
-                <div id="mnavBar">
-                    <h4>Navigation</h4>
-                    <nav></nav>
-                </div>
-            </div>
             <h3>Recipe Finder</h3>
-            <nav id="nav"></nav>
             <button id="dark"><i class="fi fi-br-moon"></i></button>
         </header>`
     }
